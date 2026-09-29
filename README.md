@@ -2,20 +2,21 @@
 
 A collection of **business-oriented SQL Server problems and solutions** designed for Data Analyst interview preparation.
 
-The goal of this repository is to develop SQL problem-solving skills by solving real-world business scenarios step by step, from fundamentals to advanced SQL concepts.
+This repository documents my practical SQL learning journey through real-world business scenarios, with a focus on problem-solving, clean SQL, and interview preparation.
 
 ---
 
 ## 🎯 Purpose
 
-This repository documents my practical SQL learning journey and focuses on:
+The goal of this repository is to develop the ability to:
 
-- Understanding business requirements
-- Translating problems into SQL logic
-- Writing clean and readable SQL
-- Using appropriate SQL Server techniques
-- Improving query performance
-- Preparing for SQL interviews
+- Understand business requirements
+- Identify the required output
+- Identify tables and relationships
+- Decide when to use filtering, aggregation, JOINs, or subqueries
+- Write clean and readable SQL Server queries
+- Explain the reasoning behind a query
+- Improve query performance
 
 ---
 
@@ -29,7 +30,7 @@ This repository documents my practical SQL learning journey and focuses on:
 - DISTINCT
 - Filtering & Sorting
 
-### Joins
+### JOINs
 - INNER JOIN
 - LEFT JOIN
 - Multiple-table JOINs
@@ -55,18 +56,17 @@ This repository documents my practical SQL learning journey and focuses on:
 - CTE-based problem solving
 
 ### Advanced SQL
-- Advanced business scenarios
-- Complex filtering
+- Complex business scenarios
 - Multi-step analytical problems
 - Query optimization
 
-> Window functions will be covered separately after completing the preceding SQL concepts.
+> Window functions will be covered separately after completing the concepts above.
 
 ---
 
-## 📊 Practice Approach
+## 📊 Problem-Solving Approach
 
-Each challenge follows a structured problem-solving process:
+Each challenge follows this process:
 
 Business Problem  
 ↓  
@@ -84,7 +84,7 @@ Write Query
 ↓  
 Validate Result  
 ↓  
-Optimize & Explain
+Explain & Optimize
 
 The focus is not only on writing SQL syntax, but also on understanding **why a particular SQL approach is appropriate**.
 
@@ -104,9 +104,9 @@ The focus is not only on writing SQL syntax, but also on understanding **why a p
 
 ---
 
-## 💼 Interview Preparation
+## 💼 Business Scenarios
 
-The challenges are designed around common business scenarios such as:
+The challenges cover scenarios such as:
 
 - Employee & Department Analysis
 - Salary Analysis
