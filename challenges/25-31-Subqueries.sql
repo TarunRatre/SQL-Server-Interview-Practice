@@ -1,29 +1,27 @@
 /*
 SQL Server Interview Practice
-Challenges 24–31
-Topics: Subqueries, MAX, TOP, distinct salary ranking,
-company-level salary analysis, and department-level salary analysis
+Challenges 25–31
+Topics: Scalar subqueries, distinct salary ranking,
+company-level salary analysis, and correlated subqueries
 */
 
 -- =========================================================
--- Challenge 24
--- Find the department with the highest total salary among
--- all departments.
--- Expected columns: DepartmentName, TotalDepartmentSalary
--- =========================================================
-
-SELECT TOP 1
-    d.DepartmentName,
-    SUM(e.Salary) AS TotalDepartmentSalary
-FROM Departments AS d
-LEFT JOIN Employees AS e
-    ON d.DepartmentID = e.DepartmentID
-GROUP BY d.DepartmentName
-ORDER BY SUM(e.Salary) DESC;
-
-
--- =========================================================
 -- Challenge 25
+-- Find the employee(s) who earn the highest salary.
+-- Expected column: EmployeeName
+-- =========================================================
+
+SELECT
+    EmployeeName
+FROM Employees
+WHERE Salary = (
+    SELECT MAX(Salary)
+    FROM Employees
+);
+
+
+-- =========================================================
+-- Challenge 26
 -- Find the second-highest salary among all employees.
 -- Expected column: SecondHighestSalary
 -- =========================================================
@@ -38,23 +36,29 @@ WHERE Salary < (
 
 
 -- =========================================================
--- Challenge 26
--- Find the second-highest salary from the Employees table.
--- Expected column: SecondHighestSalary
+-- Challenge 27
+-- Find the employee(s) who earn the second-highest
+-- distinct salary.
+-- Expected column: EmployeeName
 -- =========================================================
 
 SELECT
-    MAX(Salary) AS SecondHighestSalary
+    EmployeeName
 FROM Employees
-WHERE Salary < (
+WHERE Salary = (
     SELECT MAX(Salary)
     FROM Employees
+    WHERE Salary < (
+        SELECT MAX(Salary)
+        FROM Employees
+    )
 );
 
 
 -- =========================================================
--- Challenge 27
--- Find the third-highest salary from the Employees table.
+-- Challenge 28
+-- Find the third-highest distinct salary from the Employees
+-- table.
 -- Expected column: ThirdHighestSalary
 -- =========================================================
 
@@ -72,23 +76,8 @@ WHERE Salary < (
 
 
 -- =========================================================
--- Challenge 28
--- Find the employee(s) who earn the highest salary.
--- Expected column: EmployeeName
--- =========================================================
-
-SELECT
-    EmployeeName
-FROM Employees
-WHERE Salary = (
-    SELECT MAX(Salary)
-    FROM Employees
-);
-
-
--- =========================================================
 -- Challenge 29
--- Find the employee(s) who earn the second-highest
+-- Find the employee(s) who earn the third-highest
 -- distinct salary.
 -- Expected column: EmployeeName
 -- =========================================================
@@ -102,6 +91,10 @@ WHERE Salary = (
     WHERE Salary < (
         SELECT MAX(Salary)
         FROM Employees
+        WHERE Salary < (
+            SELECT MAX(Salary)
+            FROM Employees
+        )
     )
 );
 

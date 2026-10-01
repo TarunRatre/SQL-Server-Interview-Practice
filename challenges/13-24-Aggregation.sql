@@ -1,8 +1,8 @@
 /*
 SQL Server Interview Practice
-Challenges 13–23
-Topics: Conditional JOIN filtering, SUM, COUNT, AVG, MIN, MAX,
-GROUP BY, HAVING, LEFT JOIN, and business-oriented aggregation
+Challenges 13–24
+Topics: Conditional JOIN filtering, COUNT, SUM, AVG, MIN, MAX,
+GROUP BY, HAVING, LEFT JOIN, and department salary ranking
 */
 
 -- =========================================================
@@ -45,7 +45,7 @@ ORDER BY TotalSalary DESC;
 -- =========================================================
 -- Challenge 15
 -- Find departments that have at least 3 employees.
--- Display the departments with the highest employee count first.
+-- Display departments with the highest employee count first.
 -- Expected columns: DepartmentName, EmployeeCount
 -- =========================================================
 
@@ -95,7 +95,7 @@ GROUP BY d.DepartmentName;
 
 -- =========================================================
 -- Challenge 18
--- Find each department's average salary considering only
+-- Find each department's average salary, considering only
 -- employees whose salary is ₹50,000 or more.
 -- Expected columns: DepartmentName, AverageSalary
 -- =========================================================
@@ -182,8 +182,8 @@ GROUP BY d.DepartmentName;
 
 -- =========================================================
 -- Challenge 23
--- Find departments where the average salary is greater than
--- ₹55,000.
+-- Find the average salary for every department, including
+-- departments that have no employees.
 -- Expected columns: DepartmentName, AverageSalary
 -- =========================================================
 
@@ -191,7 +191,23 @@ SELECT
     d.DepartmentName,
     AVG(e.Salary) AS AverageSalary
 FROM Departments AS d
-INNER JOIN Employees AS e
+LEFT JOIN Employees AS e
+    ON d.DepartmentID = e.DepartmentID
+GROUP BY d.DepartmentName;
+
+
+-- =========================================================
+-- Challenge 24
+-- Find the department with the highest total salary among
+-- all departments.
+-- Expected columns: DepartmentName, TotalDepartmentSalary
+-- =========================================================
+
+SELECT TOP 1
+    d.DepartmentName,
+    SUM(e.Salary) AS TotalDepartmentSalary
+FROM Departments AS d
+LEFT JOIN Employees AS e
     ON d.DepartmentID = e.DepartmentID
 GROUP BY d.DepartmentName
-HAVING AVG(e.Salary) > 55000;
+ORDER BY TotalDepartmentSalary DESC;
